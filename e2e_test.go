@@ -19,24 +19,28 @@ func TestCalculateEndpointE2E(t *testing.T) {
 		input          Input
 		expectedOutput Output
 		expectedStatus int
+		expectedBody   string
 	}{
 		{
 			description:    "Valid input",
 			input:          Input{A: 5, B: 3},
 			expectedOutput: Output{A: 120, B: 6},
 			expectedStatus: http.StatusOK,
+			expectedBody:   `{"a":120,"b":6}`,
 		},
 		{
 			description:    "Negative input A",
 			input:          Input{A: -1, B: 3},
 			expectedOutput: Output{},
 			expectedStatus: http.StatusBadRequest,
+			expectedBody:   "Incorrect input",
 		},
 		{
 			description:    "Negative input B",
 			input:          Input{A: 5, B: -1},
 			expectedOutput: Output{},
 			expectedStatus: http.StatusBadRequest,
+			expectedBody:   "Incorrect input",
 		},
 	}
 
